@@ -1,0 +1,11 @@
+{
+  "type": "code",
+  "modid": "stillnecessaries",
+  "name": "Still Necessaries",
+  "authors": [ "Stahl", "ZigTheHedge" ],
+  "description": "Continuation of ZigTheHedge's Necessaries Mod.",
+  "version": "1.0.1",
+  "dependencies": {
+    "game": "1.18.5"
+  }
+}
