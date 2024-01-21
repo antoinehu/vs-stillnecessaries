@@ -39,7 +39,7 @@ namespace necessaries.src.LeadVessel
                     } else
                     {
                         burnTime = 0;
-                        locals = LeadVesselContents.WATER;                        
+                        locals = LeadVesselContents.WATER;
                         MarkDirty();
                         SetBlockState("water");
                     }

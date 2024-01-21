@@ -38,9 +38,9 @@ namespace necessaries.src.Mailbox
             return new ItemSlotOutput(this);
         }
 
-        public override WeightedSlot GetBestSuitedSlot(ItemSlot sourceSlot, List<ItemSlot> skipSlots = null)
+        public override WeightedSlot GetBestSuitedSlot(ItemSlot sourceSlot, ItemStackMoveOperation op, List<ItemSlot> skipSlots = null)
         {
-            return base.GetBestSuitedSlot(sourceSlot, skipSlots);
+            return base.GetBestSuitedSlot(sourceSlot, op, skipSlots);
         }
 
         public override ItemSlot this[int slotId]

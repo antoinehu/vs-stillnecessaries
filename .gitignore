@@ -6,3 +6,11 @@
 /stillnecessaries.csproj.user
 /stillnecessaries.dll
 /stillnecessaries.pdb
+/.vs/stillnecessaries/FileContentIndex
+/.vs/stillnecessaries/v17
+*.sqlite
+/.vs/VSWorkspaceState.json
+/bin/Debug/Mods/mod
+/obj
+/Properties
+/bin/Release/Mods/mod

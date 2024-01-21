@@ -145,6 +145,14 @@ namespace necessaries.src.LeadVessel
             return EnumIgniteState.Ignitable;
         }
 
+        public EnumIgniteState OnTryIgniteStack(EntityAgent byEntity, BlockPos pos, ItemSlot slot, float secondsIgniting)
+        {
+            BELeadvessel be = byEntity.World.BlockAccessor.GetBlockEntity(pos) as BELeadvessel;
+            // When not burning, burnTime == 0; when burning, burnTime > Now. Igniting probably needs refactoring, but it works, so...
+            if (be?.burnTime > byEntity.World.Calendar.TotalHours) return secondsIgniting > 2 ? EnumIgniteState.IgniteNow : EnumIgniteState.Ignitable;
+            return EnumIgniteState.NotIgnitable;
+        }
+
         public override bool ShouldReceiveClientParticleTicks(IWorldAccessor world, IPlayer player, BlockPos pos, out bool isWindAffected)
         {
             base.ShouldReceiveClientParticleTicks(world, player, pos, out _);
