@@ -1,8 +1,8 @@
 {
 	code: "grounddiamond",
 	creativeinventory: { "general": ["*"], "items": ["*"]},
-	shape: { base: "game:item/resource/crushed/crushed" },
-	textures: { 
+	shape: { base: "game:item/resource/crushed/borax" },
+	textures: {
 		"quartz": { base: "necessaries:item/grounddiamond" }
 	},
 	attributes: {
@@ -11,9 +11,9 @@
 				{ title: "game:handbooktitle-crushed", text: "game:handbooktext-crushed" }
 			]
 		}
-	},	
+	},
 	maxStackSize: 64,
-	materialDensity: 500,	
+	materialDensity: 500,
 	guiTransform: {
 		translation: { x: 0, y: 0, z: 0 },
 		rotation: { x: 171, y: 57, z: -20 },
