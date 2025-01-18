@@ -202,7 +202,7 @@ namespace necessaries.src.Parcel
                 data = ms.ToArray();
             }
 
-            capi.Network.SendBlockEntityPacket(BlockEntityPosition.X, BlockEntityPosition.Y, BlockEntityPosition.Z, 1001, data);
+            capi.Network.SendBlockEntityPacket(BlockEntityPosition, 1001, data);
             TryClose();
         }
         public override bool OnEscapePressed()

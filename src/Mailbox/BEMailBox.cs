@@ -79,7 +79,7 @@ namespace necessaries.src.Mailbox
 
                 ((ICoreServerAPI)Api).Network.SendBlockEntityPacket(
                     (IServerPlayer)byPlayer,
-                    Pos.X, Pos.Y, Pos.Z,
+                    Pos,
                     (int)EnumBlockStovePacket.OpenGUI,
                     data
                 );
@@ -161,7 +161,7 @@ namespace necessaries.src.Mailbox
                             ICoreServerAPI sapi = this.Api as ICoreServerAPI;
                             if (sapi != null)
                             {
-                                sapi.WorldManager.LoadChunkColumnPriority(destPS.X / Api.World.BlockAccessor.ChunkSize, destPS.Z / Api.World.BlockAccessor.ChunkSize, new ChunkLoadOptions()
+                                sapi.WorldManager.LoadChunkColumnPriority(destPS.X / GlobalConstants.ChunkSize, destPS.Z / GlobalConstants.ChunkSize, new ChunkLoadOptions()
                                 {
                                     OnLoaded = () =>
                                     {
@@ -259,7 +259,7 @@ namespace necessaries.src.Mailbox
                         clientDialog = new GuiDialogMailbox(DialogTitle, Inventory, Pos, Api as ICoreClientAPI);
                         clientDialog.OnClosed += () =>
                         {
-                            ((ICoreClientAPI)Api).Network.SendBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, (int)EnumBlockEntityPacketId.Close, null);
+                            ((ICoreClientAPI)Api).Network.SendBlockEntityPacket(Pos, (int)EnumBlockEntityPacketId.Close, null);
                             clientDialog = null;
                         };
                     }

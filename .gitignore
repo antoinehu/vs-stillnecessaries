@@ -2,7 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/stillnecessaries.csproj
 /stillnecessaries.csproj.user
 /stillnecessaries.dll
 /stillnecessaries.pdb

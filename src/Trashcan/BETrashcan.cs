@@ -156,7 +156,7 @@ namespace necessaries.src.Trashcan
 
                 ((ICoreServerAPI)Api).Network.SendBlockEntityPacket(
                     (IServerPlayer)byPlayer,
-                    Pos.X, Pos.Y, Pos.Z,
+                    Pos,
                     (int)EnumBlockStovePacket.OpenGUI,
                     data
                 );
