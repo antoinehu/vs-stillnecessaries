@@ -20,7 +20,7 @@ namespace necessaries.src.SharpenerStuff
             {
                 if(world.Side == EnumAppSide.Client)
                 {
-                    ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, 1101, BitConverter.GetBytes(true));
+                    ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position, 1101, BitConverter.GetBytes(true));
                 }
                 return true;
             }
@@ -48,7 +48,7 @@ namespace necessaries.src.SharpenerStuff
             base.OnBlockInteractStop(secondsUsed, world, byPlayer, blockSel);
             if (world.Side == EnumAppSide.Client)
             {
-                ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, 1101, BitConverter.GetBytes(false));
+                ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position, 1101, BitConverter.GetBytes(false));
             }
         }
 
@@ -56,7 +56,7 @@ namespace necessaries.src.SharpenerStuff
         {
             if (world.Side == EnumAppSide.Client)
             {
-                ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position.X, blockSel.Position.Y, blockSel.Position.Z, 1101, BitConverter.GetBytes(false));
+                ((ICoreClientAPI)api).Network.SendBlockEntityPacket(blockSel.Position, 1101, BitConverter.GetBytes(false));
             }
             return base.OnBlockInteractCancel(secondsUsed, world, byPlayer, blockSel, cancelReason);
         }

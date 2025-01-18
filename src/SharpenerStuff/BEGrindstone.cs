@@ -177,7 +177,7 @@ namespace necessaries.src.SharpenerStuff
                         SetBlockState("none");
                         if (Api.Side == EnumAppSide.Server)
                         {
-                            ((ICoreServerAPI)Api).Network.BroadcastBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, 1102);
+                            ((ICoreServerAPI)Api).Network.BroadcastBlockEntityPacket(Pos, 1102);
                         }
                     }
 
@@ -323,7 +323,7 @@ namespace necessaries.src.SharpenerStuff
                 var doAnimation = BitConverter.ToBoolean(data, 0);
                 if (IAmRotating == doAnimation) return;
                 IAmRotating = doAnimation;
-                ((ICoreServerAPI)Api).Network.BroadcastBlockEntityPacket(Pos.X, Pos.Y, Pos.Z, 1101, data);
+                ((ICoreServerAPI)Api).Network.BroadcastBlockEntityPacket(Pos, 1101, data);
                 MarkDirty();
             } else
                 base.OnReceivedClientPacket(fromPlayer, packetid, data);

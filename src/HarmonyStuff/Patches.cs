@@ -5,10 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
+using System.Diagnostics;
 
 namespace necessaries.src.HarmonyStuff
 {
@@ -24,6 +26,11 @@ namespace necessaries.src.HarmonyStuff
 
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
+            // I guess what happens is something like
+            // t = Transpiler(instructions)
+            // foreach (instruction in t) {
+            //    new_instruction = instruction
+            // }
             PropertyInfo m_Attributes = AccessTools.Property(typeof(ItemStack), "Attributes");
             MethodInfo m_getInt32 = AccessTools.Method(typeof(ITreeAttribute), "GetInt", new Type[] { typeof(string), typeof(int) });
             MethodInfo m_LangGet = AccessTools.Method(typeof(Lang), "Get", new Type[] { typeof(string), typeof(object[]) });
@@ -34,15 +41,26 @@ namespace necessaries.src.HarmonyStuff
             int patched = 0;
             foreach (CodeInstruction instruction in instructions)
             {
+                // local variable 3 = class Vintagestory.API.Common.IHeldBag bag
+                // local variable 0 = Vintagestory.API.Common.ItemStack
+                // local variable 2 = durability
+                // in Vintage Story 1.20.0-rc.9
                 if (instruction.opcode == OpCodes.Ldloc_3) refCount++;
-                if(instruction.IsLdarg(2) && refCount == 1 && patched == 0)
+                // argument 2 = [System.Runtime]System.Text.StringBuilder
+                if (instruction.IsLdarg(2) && refCount == 1 && patched == 0)
                 {
+                    // These go before ldarg.2 that is after the first ldloc.3
+                    // First call get_Attributes() to get ITreeAttributes and store it on top of the stack
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
                     yield return new CodeInstruction(OpCodes.Callvirt, m_Attributes.GetGetMethod(false));
+                    // Put "maxRepair" and durability on top of the stack
                     yield return new CodeInstruction(OpCodes.Ldstr, "maxRepair");
-                    yield return new CodeInstruction(OpCodes.Ldloc_3);
+                    yield return new CodeInstruction(OpCodes.Ldloc_2);
+                    // Call ITreeAttributes.GetInt("maxRepair", defaultValue=durability)
                     yield return new CodeInstruction(OpCodes.Callvirt, m_getInt32);
-                    yield return new CodeInstruction(OpCodes.Stloc_3);
+                    // Store the resulting value for 'maxRepair' into durability
+                    yield return new CodeInstruction(OpCodes.Stloc_2);
+                    // Continue normal code
                     yield return instruction;
                     patched = 1;
                 } 

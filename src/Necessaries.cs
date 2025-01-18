@@ -159,7 +159,7 @@ namespace necessaries.src
                 .RegisterMessageType(typeof(PostService))
                 .SetMessageHandler<PostService>(OnServerMessage)
             ;
-            //Harmony.DEBUG = true;
+            Harmony.DEBUG = true;
             harmony.PatchAll();
         }
 
